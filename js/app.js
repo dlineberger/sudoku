@@ -2,7 +2,8 @@ $(document).ready(function() {
 	var sudoku = new Sudoku();
 
 	var $board = $(".board");
-	
+
+	// Construct the board
 	for (var b = 0; b < 9; b++) {
 		var $block = $("<div class='board-block'></div>");
 		for (var r = 0; r < 3; r++) {
@@ -19,7 +20,6 @@ $(document).ready(function() {
 				if (!cellValue) {
 					$cell.addClass("editable");
 				}
-				
 				$row.append($cell);
 			}
 			$block.append($row);
@@ -27,37 +27,26 @@ $(document).ready(function() {
 		$board.append($block);
 	}
 
-	
-	// for (var i = 0; i < sudoku.board.length; i++) {
-	// 	$row = $("<div class='board-row'></div>");
-	// 	var boardRow = sudoku.board[i];
-	// 	for (var j = 0; j < sudoku.board.length; j++) {
-	// 		$cell = $("<div class='board-cell'>" + (boardRow[j] || '') + "</div>");
-	// 		$cell.attr("data-row", i);
-	// 		$cell.attr("data-col", j);
-	// 		if (i % 3 === 0) {
-	// 			$cell.addClass("border-row");
-	// 		}
-			
-	// 		if (!boardRow[j]) {
-	// 			$cell.addClass("editable");
-	// 		}
-	// 		$row.append($cell);
-	// 	}
-	// 	$board.append($row);
-	// }
-
 	$(".editable").click(function() {
 		var row = $(this).attr('data-row');
 		var col = $(this).attr('data-col');
-		sudoku.set(row, col, 'X');
-		$(this).text("X");
+		$("#numberPopup").prependTo($(this)).toggle();
+	});
+
+	$("#numberPopup .board-cell").click(function() {
+		var $cell = $(this).closest(".editable");
+		var val = parseInt($(this).text());
+		var row = parseInt($cell.attr("data-row"));
+		var col = parseInt($cell.attr("data-col"));
+		sudoku.set(row, col, val);
+
+		$("#numberPopup").prependTo($('body'));
+		$cell.text(val);
 	});
 
 	$(".reset").click(function() {
 		sudoku.reset();
 		$(".editable").text('');
 	});
-
 	
 });

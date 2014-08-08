@@ -24,6 +24,7 @@ body {
 
 .board-cell {
 	display: inline-block;
+	position: relative;
 	border: 1px solid #999;
 	width: 40px;
 	height: 40px;
@@ -44,3 +45,12 @@ body {
 	border: 1px solid #ff0000;
 	position: relative;
 }
+
+#numberPopup {
+	background-color: #fff;
+	display: none;
+	position: absolute;
+	top: 40px;
+	z-index: 1;
+}
+
