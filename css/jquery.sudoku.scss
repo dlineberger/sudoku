@@ -1,0 +1,83 @@
+
+.sudoku {
+	width: 384;
+
+	.board-block {
+		display: inline-block;
+		border: 1px solid #000;
+	}
+
+	.board-cell {
+		float: left;
+		position: relative;
+		border: 1px solid #999;
+		width: 40px;
+		height: 40px;
+		text-align: center;
+		vertical-align: middle;
+		line-height: 40px;
+
+		&:nth-child(3n + 1) {
+			clear: left;
+		}
+
+		&.editable {
+			cursor: pointer;
+			color: #999;
+
+			&:hover {
+				border: 1px solid #ff0000;
+			}
+
+			.incorrect-value {
+				color: #ff0000;
+			}
+
+			.correct-value {
+				color: #00ff00;
+			}
+		}
+
+	}
+
+	.number-popup {
+		background-color: #fff;
+		width: 128px;
+		position: absolute;
+		top: 48px;
+		left: 8px;
+		z-index: 1;
+		box-shadow: 3px 3px 3px #999;
+
+		.board-cell {
+			color: #000;
+			cursor: pointer;
+		}
+
+		/* http://css-tricks.com/snippets/css/css-triangle/ */
+		.arrow-up {
+			z-index: 1;
+			position: absolute;
+			width: 0;
+			height: 0;
+			border-left: 8px solid transparent;
+			border-right: 8px solid transparent;
+			border-bottom: 8px solid #f00;
+			top: -8px;
+			left: 4px;
+		}
+	}
+}
+
+@media only screen and (max-width : 383px) {
+	.sudoku {
+		width: 312px;
+
+		.number-popup {
+			width: 104px;
+		}
+		.board-cell {
+			width: 32px;
+		}
+	}
+}

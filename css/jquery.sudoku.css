@@ -1,75 +1,55 @@
+.sudoku {
+  width: 384; }
+  .sudoku .board-block {
+    display: inline-block;
+    border: 1px solid #000; }
+  .sudoku .board-cell {
+    float: left;
+    position: relative;
+    border: 1px solid #999;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px; }
+    .sudoku .board-cell:nth-child(3n + 1) {
+      clear: left; }
+    .sudoku .board-cell.editable {
+      cursor: pointer;
+      color: #999; }
+      .sudoku .board-cell.editable:hover {
+        border: 1px solid #ff0000; }
+      .sudoku .board-cell.editable .incorrect-value {
+        color: #ff0000; }
+      .sudoku .board-cell.editable .correct-value {
+        color: #00ff00; }
+  .sudoku .number-popup {
+    background-color: #fff;
+    width: 128px;
+    position: absolute;
+    top: 48px;
+    left: 8px;
+    z-index: 1;
+    box-shadow: 3px 3px 3px #999;
+    /* http://css-tricks.com/snippets/css/css-triangle/ */ }
+    .sudoku .number-popup .board-cell {
+      color: #000;
+      cursor: pointer; }
+    .sudoku .number-popup .arrow-up {
+      z-index: 1;
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid #f00;
+      top: -8px;
+      left: 4px; }
 
-.board-block {
-	display: inline-block;
-	border: 1px solid #000;
-}
-
-.board-row {
-	clear: both;
-}
-
-.board-row(3) {
-	
-}
-
-.board-cell {
-	display: inline-block;
-	position: relative;
-	border: 1px solid #999;
-	width: 40px;
-	height: 40px;
-	text-align: center;
-	vertical-align: middle;
-	line-height: 40px;
-}
-
-.board-cell:nth-child(3) {
-	clear: left;
-}
-
-.board-cell.editable {
-	cursor: pointer;
-	color: #999;
-}
-
-.board-cell.editable:hover {
-	border: 1px solid #ff0000;
-	position: relative;
-}
-
-.number-popup {
-	background-color: #fff;
-	/*display: none;*/
-	position: absolute;
-	top: 40px;
-	z-index: 1;
-}
-
-.number-popup .board-block-row {
-	width: 136;
-}
-
-.number-popup .board-cell {
-	cursor: pointer;
-}
-
-.editable.incorrect-value {
-	color: #ff0000;
-}
-
-.editable.correct-value {
-	color: #00ff00;
-}
-
-/* http://css-tricks.com/snippets/css/css-triangle/ */
-.arrow-down {
-	position: absolute;
-	width: 0; 
-	height: 0; 
-	border-left: 8px solid transparent;
-	border-right: 8px solid transparent;
-	border-top: 8px solid #f00;
-	bottom: -8px;
-	left: 8px;
-}
-
+@media only screen and (max-width: 383px) {
+  .sudoku {
+    width: 312px; }
+    .sudoku .number-popup {
+      width: 104px; }
+    .sudoku .board-cell {
+      width: 32px; } }

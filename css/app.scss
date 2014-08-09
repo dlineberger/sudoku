@@ -1,0 +1,52 @@
+body {
+	background-color: #fff;
+	font-family: Georgia,serif;
+	font-size: 1.4em;
+}
+
+header {
+	position: absolute;
+	top: 0;
+	height: 40px;
+	width: 100%;
+	background-color: #3680C7;
+	color: #fff;
+
+	.header-container {
+		margin: 0 auto;
+		max-width: 600px;
+	}
+	
+	h2 {
+		vertical-align: middle;
+		line-height: 40px;
+		display: inline;
+		margin: 10px;
+	}
+
+	button {
+		background-color: #fff;
+		border: 1px solid #000;
+		margin-top: 8px;
+		height: 24px;
+	}
+
+	ul {
+		float: right;
+		margin-right: 10px;
+
+		li {
+			display: inline;
+		}
+	}
+
+}
+
+.container {
+	margin-top: 40px;
+	padding-top: 20px;
+}
+
+.sudoku {
+	margin: 0px auto;
+}

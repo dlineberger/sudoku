@@ -5,19 +5,14 @@
 	var createPopup = function($element) {
 		var $popup = $('\
 <div class="number-popup"> \
-    <div class="arrow-down"></div> \
+    <div class="arrow-up"></div> \
     <div class="board-block"> \
-        <div class="board-block-row"> \
             <div class="board-cell">1</div> \
             <div class="board-cell">2</div> \
             <div class="board-cell">3</div> \
-        </div> \
-        <div class="board-block-row"> \
             <div class="board-cell">4</div> \
             <div class="board-cell">5</div> \
             <div class="board-cell">6</div> \
-        </div> \
-        <div class="board-block-row"> \
             <div class="board-cell">7</div> \
             <div class="board-cell">8</div> \
             <div class="board-cell">9</div> \
@@ -32,10 +27,10 @@
 			var row = parseInt($cell.attr("data-row"));
 			var col = parseInt($cell.attr("data-col"));
 
-			closePopup($element);
-
-			board[row][col].value = val;
-			$cell.text(val);
+			closePopup($element, function() {
+				board[row][col].value = val;
+				$cell.text(val);
+			});
 		})
 	};
 
@@ -45,8 +40,6 @@
 			var $block = $("<div class='board-block'></div>");
 			for (var r = 0; r < 3; r++) {
 				var dataRow = r + (Math.floor(b / 3) * 3);
-
-				var $row = $("<div class='board-block-row'></div>");
 				for (var c = 0; c < 3; c++) {
 					var dataCol = c + (b % 3) * 3;
 
@@ -58,9 +51,8 @@
 					if (!boardValue.permanent) {
 						$cell.addClass("editable");
 					}
-					$row.append($cell);
+					$block.append($cell);
 				}
-				$block.append($row);
 			}
 			$element.append($block);
 		}
@@ -68,11 +60,16 @@
 	}
 
 	var openPopup = function($element, $cellElement) {
-		$element.find(".number-popup").detach().appendTo($cellElement).show();
+		$element.find(".number-popup").detach().appendTo($cellElement).fadeIn(100);
 	};
 
-	var closePopup = function($element) {
-		var popup = $element.find(".number-popup").hide().detach().appendTo($element);
+	var closePopup = function($element, fn) {
+		var popup = $element.find(".number-popup").fadeOut(100, function() {
+			$(this).detach().appendTo($element);
+			if (fn) {
+				fn();
+			}
+		});
 	};
 
 	var listenToClickEvents = function($element) {
