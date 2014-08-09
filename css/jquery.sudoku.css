@@ -1,0 +1,75 @@
+
+.board-block {
+	display: inline-block;
+	border: 1px solid #000;
+}
+
+.board-row {
+	clear: both;
+}
+
+.board-row(3) {
+	
+}
+
+.board-cell {
+	display: inline-block;
+	position: relative;
+	border: 1px solid #999;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 40px;
+}
+
+.board-cell:nth-child(3) {
+	clear: left;
+}
+
+.board-cell.editable {
+	cursor: pointer;
+	color: #999;
+}
+
+.board-cell.editable:hover {
+	border: 1px solid #ff0000;
+	position: relative;
+}
+
+.number-popup {
+	background-color: #fff;
+	/*display: none;*/
+	position: absolute;
+	top: 40px;
+	z-index: 1;
+}
+
+.number-popup .board-block-row {
+	width: 136;
+}
+
+.number-popup .board-cell {
+	cursor: pointer;
+}
+
+.editable.incorrect-value {
+	color: #ff0000;
+}
+
+.editable.correct-value {
+	color: #00ff00;
+}
+
+/* http://css-tricks.com/snippets/css/css-triangle/ */
+.arrow-down {
+	position: absolute;
+	width: 0; 
+	height: 0; 
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-top: 8px solid #f00;
+	bottom: -8px;
+	left: 8px;
+}
+
