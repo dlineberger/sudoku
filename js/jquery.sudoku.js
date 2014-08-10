@@ -5,7 +5,7 @@
 	var createPopup = function($element) {
 		var $popup = $('\
 <div class="number-popup"> \
-    <div class="arrow-up"></div> \
+    <div class="arrow"></div> \
     <div class="board-block"> \
             <div class="board-cell">1</div> \
             <div class="board-cell">2</div> \
@@ -28,6 +28,7 @@
 			var col = parseInt($cell.attr("data-col"));
 
 			closePopup($element, function() {
+				$cell.removeClass('selected');
 				board[row][col].value = val;
 				$cell.text(val);
 			});
@@ -60,7 +61,26 @@
 	}
 
 	var openPopup = function($element, $cellElement) {
-		$element.find(".number-popup").detach().appendTo($cellElement).fadeIn(100);
+		
+		var $popup = $element.find(".number-popup").detach();
+		$popup.removeClass('popup-direction-up popup-direction-down popup-direction-left popup-direction-right');
+		
+		// position popup so it doesn't go past board		
+		var boardHeight = $cellElement.offsetParent().height();
+		if (boardHeight - $cellElement.position().top < 176) {
+			$popup.addClass('popup-direction-up');
+		} else {
+			$popup.addClass('popup-direction-down');
+		}
+
+		var boardWidth = $cellElement.offsetParent().width();
+		if (boardWidth - $cellElement.position().left < 136) {
+			$popup.addClass('popup-direction-left');
+		} else {
+			$popup.addClass('popup-direction-right');
+		}
+		
+		$popup.appendTo($cellElement).fadeIn(100);
 	};
 
 	var closePopup = function($element, fn) {
@@ -77,6 +97,10 @@
 			if (e.target != this) return;
 			
 			var $this = $(this);
+			$element.find('.selected').removeClass('selected');
+			
+			$this.addClass('selected');
+			
 			if ($this.find('.number-popup').length > 0) {
 				closePopup($element);
 			} else {

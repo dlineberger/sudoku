@@ -1,7 +1,7 @@
 body {
   background-color: #fff;
   font-family: Georgia,serif;
-  font-size: 1.4em; }
+  font-size: 1.0em; }
 
 header {
   position: absolute;
@@ -12,20 +12,22 @@ header {
   color: #fff; }
   header .header-container {
     margin: 0 auto;
-    max-width: 600px; }
-  header h2 {
-    vertical-align: middle;
-    line-height: 40px;
+    height: 40px;
+    max-width: 600px;
+    line-height: 29px;
+    vertical-align: middle; }
+  header .title {
     display: inline;
-    margin: 10px; }
+    margin-left: 10px;
+    font-family: Helvetica, sans-serif;
+    text-transform: uppercase; }
   header button {
     background-color: #fff;
     border: 1px solid #000;
     margin-top: 8px;
     height: 24px; }
   header ul {
-    float: right;
-    margin-right: 10px; }
+    float: right; }
     header ul li {
       display: inline; }
 
