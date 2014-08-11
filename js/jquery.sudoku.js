@@ -65,7 +65,7 @@
 		var $popup = $element.find(".number-popup").detach();
 		$popup.removeClass('popup-direction-up popup-direction-down popup-direction-left popup-direction-right');
 
-		// position popup so it doesn't go past board
+		// position popup so it doesn't go past board bounds
 		var boardHeight = $cellElement.offsetParent().height();
 		if (boardHeight - $cellElement.position().top < 176) {
 			$popup.addClass('popup-direction-up');
@@ -83,38 +83,36 @@
 		$popup.appendTo($cellElement).fadeIn(100);
 	};
 
-	var closePopup = function($element, fn) {
-		var popup = $element.find(".number-popup").fadeOut(100, function() {
-			$(this).detach().appendTo($element);
-			if (fn) {
-				fn();
-			}
-		});
+	var closePopup = function($element, fn, value) {
+		var $popup = $element.find(".number-popup").hide();
+		$popup.detach().appendTo($element);
 	};
 
 	var onPopupNumberSelection = function() {
 		var $cell = $(this).closest(".editable");
 		var $sudoku = $cell.closest('.sudoku');
 		var val = parseInt($(this).text());
-
-		closePopup($sudoku, function() {
-			$cell.removeClass('selected');
-			setValue($cell, val);
-		});
+		closePopup($sudoku);
+		$cell.removeClass('selected');
+		setValue($cell, val);
 	};
 
-	var onEditableClick = function(e) {
+	var onCellClick = function(e) {
 		if (e.target != this) return;
-
 		var $this = $(this);
-		var $sudoku = $(this).closest('.sudoku');
-		$sudoku.find('.selected').removeClass('selected');
-		$this.removeClass('incorrect-value correct-value').addClass('selected');
 
-		if ($this.find('.number-popup').length > 0) {
-			closePopup($sudoku);
-		} else {
+		if ($this.hasClass('selected') || $this.parent().parent().hasClass('number-popup')) {
+			return;
+		}
+
+		var $sudoku = $this.closest('.sudoku');
+		$sudoku.find('.selected').removeClass('selected');
+		closePopup($sudoku);
+
+		if ($this.hasClass('editable')) {
+			$this.removeClass('incorrect-value correct-value').addClass('selected');
 			openPopup($sudoku, $this);
+			return;
 		}
 	};
 
@@ -159,11 +157,10 @@
 			return this.each(function() {
 				var $this = $(this);
 				drawBoard($this);
-				$this.find('.editable').click(onEditableClick);
-				$this.find('.board-cell').keydown(onKeyPress);
-
+				$this.find('.board-cell')
+					.keydown(onKeyPress)
+					.click(onCellClick);
 				$this.find('.number-popup .board-cell').click(onPopupNumberSelection);
-
 			});
 		},
 		reset: function() {
