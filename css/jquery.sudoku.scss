@@ -1,3 +1,11 @@
+$dark-blue: #3680c7;
+$light-blue: #b3d4fd;
+$black: #000;
+$white: #fff;
+$gray: #999;
+$red: #f00;
+$green: #0f0;
+
 
 .sudoku {
 	width: 384;
@@ -5,18 +13,19 @@
 
 	.board-block {
 		display: inline-block;
-		border: 1px solid #000;
+		border: 1px solid $black;
 	}
 
 	.board-cell {
 		float: left;
 		position: relative;
-		border: 1px solid #999;
+		border: 1px solid $gray;
 		width: 40px;
 		height: 40px;
 		text-align: center;
 		vertical-align: middle;
 		line-height: 40px;
+		outline: none;
 
 		&:nth-child(3n + 1) {
 			clear: left;
@@ -24,31 +33,36 @@
 
 		&.editable {
 			cursor: pointer;
-			color: #3680C7;
+			color: $dark-blue;
 
 			&.selected {
-				background-color: #3680C7;
-				color: #fff;
+				background-color: $light-blue;
+				color: $white;
 			}
 
 			&.incorrect-value {
-				color: #ff0000;
+				color: $red;
 			}
 
 			&.correct-value {
-				color: #00ff00;
+				color: $green;
 			}
+		}
+
+		&:focus {
+			background-color: $light-blue;
+			color: $white;
 		}
 
 	}
 
 	.number-popup {
-		background-color: #fff;
+		background-color: $white;
 		width: 128px;
 		position: absolute;
 		z-index: 1;
 		box-shadow: 3px 3px 3px #999;
-	
+
 		/* http://css-tricks.com/snippets/css/css-triangle */
 		.arrow {
 			z-index: 1;
@@ -74,7 +88,7 @@
 			.arrow {
 				right: 4px;
 			}
-			
+
 		}
 
 		&.popup-direction-down {
@@ -82,30 +96,36 @@
 
 			.arrow {
 				top: -8px;
-				border-bottom: 8px solid #3680C7;
+				border-bottom: 8px solid $dark-blue;
 				border-top: 0;
 			}
 		}
-		
-		
+
+
 		&.popup-direction-up {
 			bottom: 48px;
 
 			.arrow {
 				bottom: -8px;
-				border-top: 8px solid #3680C7;
+				border-top: 8px solid $dark-blue;
 				border-bottom: 0;
 			}
 		}
 
 		.board-block {
-			border-color: #3680C7;
+			border-radius: 5px;
+			border-color: $dark-blue;
 		}
 
 		.board-cell {
-			border-color: #3680C7;
+			border-color: $dark-blue;
 			color: #000;
 			cursor: pointer;
+
+			&:hover {
+				background-color: $light-blue;
+				color: $white;
+			}
 		}
 
 	}

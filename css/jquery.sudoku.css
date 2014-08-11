@@ -3,30 +3,34 @@
   position: relative; }
   .sudoku .board-block {
     display: inline-block;
-    border: 1px solid #000; }
+    border: 1px solid black; }
   .sudoku .board-cell {
     float: left;
     position: relative;
-    border: 1px solid #999;
+    border: 1px solid #999999;
     width: 40px;
     height: 40px;
     text-align: center;
     vertical-align: middle;
-    line-height: 40px; }
+    line-height: 40px;
+    outline: none; }
     .sudoku .board-cell:nth-child(3n + 1) {
       clear: left; }
     .sudoku .board-cell.editable {
       cursor: pointer;
-      color: #3680C7; }
+      color: #3680c7; }
       .sudoku .board-cell.editable.selected {
-        background-color: #3680C7;
-        color: #fff; }
+        background-color: #b3d4fd;
+        color: white; }
       .sudoku .board-cell.editable.incorrect-value {
-        color: #ff0000; }
+        color: red; }
       .sudoku .board-cell.editable.correct-value {
-        color: #00ff00; }
+        color: lime; }
+    .sudoku .board-cell:focus {
+      background-color: #b3d4fd;
+      color: white; }
   .sudoku .number-popup {
-    background-color: #fff;
+    background-color: white;
     width: 128px;
     position: absolute;
     z-index: 1;
@@ -51,20 +55,24 @@
       top: 48px; }
       .sudoku .number-popup.popup-direction-down .arrow {
         top: -8px;
-        border-bottom: 8px solid #3680C7;
+        border-bottom: 8px solid #3680c7;
         border-top: 0; }
     .sudoku .number-popup.popup-direction-up {
       bottom: 48px; }
       .sudoku .number-popup.popup-direction-up .arrow {
         bottom: -8px;
-        border-top: 8px solid #3680C7;
+        border-top: 8px solid #3680c7;
         border-bottom: 0; }
     .sudoku .number-popup .board-block {
-      border-color: #3680C7; }
+      border-radius: 5px;
+      border-color: #3680c7; }
     .sudoku .number-popup .board-cell {
-      border-color: #3680C7;
+      border-color: #3680c7;
       color: #000;
       cursor: pointer; }
+      .sudoku .number-popup .board-cell:hover {
+        background-color: #b3d4fd;
+        color: white; }
 
 @media only screen and (max-width: 383px) {
   .sudoku {
