@@ -40,9 +40,11 @@
 					var $cell = $("<div class='board-cell'>" + displayValue + "</div>");
 					$cell.attr("data-row", dataRow);
 					$cell.attr("data-col", dataCol);
-					if (!boardValue.permanent) {
+					$cell.attr("tabIndex", ++tabIndex);
+					if (boardValue.permanent) {
+						$cell.addClass("permanent");
+					} else {
 						$cell.addClass("editable");
-						$cell.attr("tabIndex", ++tabIndex);
 						if (boardValue.value) {
 							$cell.text(boardValue.value);
 						}
@@ -119,7 +121,7 @@
 	var onKeyPress = function(e) {
 		var $this = $(this);
 		var $sudoku = $this.closest('.sudoku');
-		if (e.which >= 49 && e.which <= 57) {
+		if (e.which >= 49 && e.which <= 57 && $this.hasClass('editable')) {
 			// number keys -- insert typed value
 			setValue($this, e.which - 48);
 		} else if (e.which >= 37 && e.which <= 40) {
@@ -127,34 +129,26 @@
 			$sudoku.find('.selected').removeClass('selected');
 			closePopup($sudoku);
 
-			var focusNextEditable = function($cell, constantAttribute, variableAttribute, decrement) {
+			var focusNextCell = function($cell, constantAttribute, variableAttribute, decrement) {
 				var constantValue = parseInt($cell.attr(constantAttribute));
 				var variableValue = parseInt($cell.attr(variableAttribute));
-				variableValue = decrement ? variableValue - 1 : variableValue + 1;
-
-				var $nextEditable = $('.editable[' + constantAttribute + '=' + constantValue + '][' + variableAttribute + '=' + variableValue + ']');
-				while ($nextEditable.length === 0 && variableValue >= 0 && variableValue <= 8)
-				{
-					variableValue = decrement ? variableValue - 1 : variableValue + 1;
-					$nextEditable = $('.editable[' + constantAttribute + '=' + constantValue + '][' + variableAttribute + '=' + variableValue + ']');
-				}
-				if ($nextEditable.length > 0) {
-					$nextEditable.focus();
-				}
+				variableValue = decrement ? Math.max(0, variableValue - 1) : Math.min(8, variableValue + 1);
+				var $nextCell = $('.board-cell[' + constantAttribute + '=' + constantValue + '][' + variableAttribute + '=' + variableValue + ']');
+				$nextCell.focus();
 			}
 
 			switch (e.which) {
 			case 37: // left
-				focusNextEditable($this, 'data-row', 'data-col', true);
+				focusNextCell($this, 'data-row', 'data-col', true);
 				break;
 			case 38: // up
-				focusNextEditable($this, 'data-col', 'data-row', true);
+				focusNextCell($this, 'data-col', 'data-row', true);
 				break;
 			case 39: // right
-				focusNextEditable($this, 'data-row', 'data-col')
+				focusNextCell($this, 'data-row', 'data-col')
 				break;
 			case 40: // down
-				focusNextEditable($this, 'data-col', 'data-row');
+				focusNextCell($this, 'data-col', 'data-row');
 				break;
 			}
 		}
@@ -165,9 +159,8 @@
 			return this.each(function() {
 				var $this = $(this);
 				drawBoard($this);
-				$this.find('.editable')
-					.click(onEditableClick)
-					.keydown(onKeyPress);
+				$this.find('.editable').click(onEditableClick);
+				$this.find('.board-cell').keydown(onKeyPress);
 
 				$this.find('.number-popup .board-cell').click(onPopupNumberSelection);
 

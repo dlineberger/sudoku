@@ -16,6 +16,8 @@
     outline: none; }
     .sudoku .board-cell:nth-child(3n + 1) {
       clear: left; }
+    .sudoku .board-cell.permanent:focus {
+      background-color: #efefef; }
     .sudoku .board-cell.editable {
       cursor: pointer;
       color: #3680c7; }
@@ -26,9 +28,9 @@
         color: red; }
       .sudoku .board-cell.editable.correct-value {
         color: lime; }
-    .sudoku .board-cell:focus {
-      background-color: #b3d4fd;
-      color: white; }
+      .sudoku .board-cell.editable:focus {
+        background-color: #b3d4fd;
+        color: white; }
   .sudoku .number-popup {
     background-color: white;
     width: 128px;

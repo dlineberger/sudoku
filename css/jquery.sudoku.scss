@@ -3,6 +3,7 @@ $light-blue: #b3d4fd;
 $black: #000;
 $white: #fff;
 $gray: #999;
+$light-gray: #efefef;
 $red: #f00;
 $green: #0f0;
 
@@ -31,6 +32,12 @@ $green: #0f0;
 			clear: left;
 		}
 
+		&.permanent {
+			&:focus {
+				background-color: $light-gray;
+			}
+		}
+
 		&.editable {
 			cursor: pointer;
 			color: $dark-blue;
@@ -47,11 +54,11 @@ $green: #0f0;
 			&.correct-value {
 				color: $green;
 			}
-		}
-
-		&:focus {
-			background-color: $light-blue;
-			color: $white;
+			
+			&:focus {
+				background-color: $light-blue;
+				color: $white;
+			}
 		}
 
 	}
@@ -100,7 +107,6 @@ $green: #0f0;
 				border-top: 0;
 			}
 		}
-
 
 		&.popup-direction-up {
 			bottom: 48px;
