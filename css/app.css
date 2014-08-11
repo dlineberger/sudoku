@@ -14,22 +14,25 @@ header {
     margin: 0 auto;
     height: 40px;
     max-width: 600px;
-    line-height: 29px;
-    vertical-align: middle; }
+    padding: 5px; }
+    header .header-container img {
+      float: left; }
   header .title {
-    display: inline;
+    display: inline-block;
+    font-size: 20px;
+    margin-top: 6px;
     margin-left: 10px;
     font-family: Helvetica, sans-serif;
     text-transform: uppercase; }
   header button {
     background-color: #fff;
     border: 1px solid #000;
-    margin-top: 8px;
     height: 24px; }
   header ul {
     float: right; }
     header ul li {
-      display: inline; }
+      display: inline-block;
+      margin-top: 3px; }
 
 .container {
   margin-top: 40px;
