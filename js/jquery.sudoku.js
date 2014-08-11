@@ -1,13 +1,29 @@
 (function( $ ) {
 
-	var board = new Sudoku();
-
 	var setValue = function($cell, value) {
 		var row = parseInt($cell.attr("data-row"));
 		var col = parseInt($cell.attr("data-col"));
 		board[row][col].value = value;
 		$cell.text(value);
+		saveBoard();
 	};
+
+	var saveBoard = function() {
+		if ('localStorage' in window && window['localStorage'] !== null) {
+			window.localStorage['sudoku'] = JSON.stringify(board);
+		}
+	}
+
+	var restoreBoard = function () {
+		if ('localStorage' in window && window['localStorage'] !== null) {
+			if ('sudoku' in window.localStorage) {
+				return JSON.parse(window.localStorage['sudoku']);
+			}
+		}
+		return null;
+	}
+
+	var board = (restoreBoard() || new Sudoku());
 
 	// Construct the board
 	var drawBoard = function($element) {
@@ -27,8 +43,10 @@
 					if (!boardValue.permanent) {
 						$cell.addClass("editable");
 						$cell.attr("tabIndex", ++tabIndex);
+						if (boardValue.value) {
+							$cell.text(boardValue.value);
+						}
 					}
-
 					$block.append($cell);
 				}
 			}
@@ -158,6 +176,12 @@
 		reset: function() {
 			var $element = $(this);
 			closePopup($element);
+			for (var i = 0; i < board.length; i++) {
+				for (var j = 0; j < board.length; j++) {
+					delete board[i][j]['value'];
+				}
+			}
+			saveBoard();
 			$element.find(".editable").text('');
 		},
 		validate: function() {
