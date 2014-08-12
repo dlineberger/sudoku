@@ -9,19 +9,19 @@
 	};
 
 	var saveBoard = function() {
-		if ('localStorage' in window && window['localStorage'] !== null) {
-			window.localStorage['sudoku'] = JSON.stringify(board);
+		if ('localStorage' in window && window.localStorage !== null) {
+			window.localStorage.sudoku = JSON.stringify(board);
 		}
-	}
+	};
 
 	var restoreBoard = function () {
-		if ('localStorage' in window && window['localStorage'] !== null) {
+		if ('localStorage' in window && window.localStorage !== null) {
 			if ('sudoku' in window.localStorage) {
-				return JSON.parse(window.localStorage['sudoku']);
+				return JSON.parse(window.localStorage.sudoku);
 			}
 		}
 		return null;
-	}
+	};
 
 	var board = (restoreBoard() || [
 		[ {answer: 5, permanent: true}, {answer: 3, permanent: true}, {answer: 4}, {answer: 6}, {answer: 7, permanent: true}, {answer: 8}, {answer: 9}, {answer: 1}, {answer: 2} ],
@@ -69,7 +69,7 @@
 <div class="board-cell">6</div><div class="board-cell">7</div><div class="board-cell">8</div><div class="board-cell">9</div></div></div></div>');
 
 		$element.append($popup.hide());
-	}
+	};
 
 	var openPopup = function($element, $cellElement) {
 		var $popup = $element.find(".number-popup").detach();
@@ -143,7 +143,7 @@
 				variableValue = decrement ? Math.max(0, variableValue - 1) : Math.min(8, variableValue + 1);
 				var $nextCell = $('.board-cell[' + constantAttribute + '=' + constantValue + '][' + variableAttribute + '=' + variableValue + ']');
 				$nextCell.focus();
-			}
+			};
 
 			switch (e.which) {
 			case 37: // left
@@ -153,13 +153,14 @@
 				focusNextCell($this, 'data-col', 'data-row', true);
 				break;
 			case 39: // right
-				focusNextCell($this, 'data-row', 'data-col')
+				focusNextCell($this, 'data-row', 'data-col');
 				break;
 			case 40: // down
 				focusNextCell($this, 'data-col', 'data-row');
 				break;
 			}
 		}
+		return false;
 	};
 
 	var methods = {
@@ -178,7 +179,7 @@
 			closePopup($element);
 			for (var i = 0; i < board.length; i++) {
 				for (var j = 0; j < board.length; j++) {
-					delete board[i][j]['value'];
+					delete board[i][j].value;
 				}
 			}
 			saveBoard();
