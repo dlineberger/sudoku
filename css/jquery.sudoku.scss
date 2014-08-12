@@ -50,10 +50,6 @@ $green: #0f0;
 			&.incorrect-value {
 				color: $red;
 			}
-
-			&.correct-value {
-				color: $green;
-			}
 			
 			&:focus {
 				background-color: $light-blue;
@@ -68,7 +64,7 @@ $green: #0f0;
 		width: 128px;
 		position: absolute;
 		z-index: 1;
-		box-shadow: 3px 3px 3px #999;
+		box-shadow: 3px 3px 3px $gray;
 
 		/* http://css-tricks.com/snippets/css/css-triangle */
 		.arrow {
@@ -119,7 +115,6 @@ $green: #0f0;
 		}
 
 		.board-block {
-			border-radius: 5px;
 			border-color: $dark-blue;
 		}
 

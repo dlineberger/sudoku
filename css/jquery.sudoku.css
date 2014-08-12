@@ -26,8 +26,6 @@
         color: white; }
       .sudoku .board-cell.editable.incorrect-value {
         color: red; }
-      .sudoku .board-cell.editable.correct-value {
-        color: lime; }
       .sudoku .board-cell.editable:focus {
         background-color: #b3d4fd;
         color: white; }
@@ -36,7 +34,7 @@
     width: 128px;
     position: absolute;
     z-index: 1;
-    box-shadow: 3px 3px 3px #999;
+    box-shadow: 3px 3px 3px #999999;
     /* http://css-tricks.com/snippets/css/css-triangle */ }
     .sudoku .number-popup .arrow {
       z-index: 1;
@@ -66,7 +64,6 @@
         border-top: 8px solid #3680c7;
         border-bottom: 0; }
     .sudoku .number-popup .board-block {
-      border-radius: 5px;
       border-color: #3680c7; }
     .sudoku .number-popup .board-cell {
       border-color: #3680c7;

@@ -21,6 +21,4 @@ $(document).ready(function() {
 	$('.reset').click(function() {
 		$('#reset-modal').fadeIn(150);
 	});
-
-
 });

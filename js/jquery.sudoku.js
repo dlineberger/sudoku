@@ -28,7 +28,7 @@
 			}
 		}
 		return true;
-	}
+	};
 
 	var saveBoard = function() {
 		if ('localStorage' in window && window.localStorage !== null) {
