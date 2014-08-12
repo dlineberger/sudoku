@@ -1,12 +1,34 @@
 (function( $ ) {
 
+	var options = {};
+	
 	var setValue = function($cell, value) {
 		var row = parseInt($cell.attr("data-row"));
 		var col = parseInt($cell.attr("data-col"));
 		board[row][col].value = value;
 		$cell.text(value);
+
+		// test for complete board
+		if (options.onComplete && isComplete()) {
+			options.onComplete();
+		}
+		
 		saveBoard();
 	};
+
+	var isComplete = function() {
+		for (var i = 0; i < board.length; i++) {
+			for (var j = 0; j < board.length; j++) {
+				var cell = board[i][j];
+				if (!cell.permanent) {
+					if (cell.value === undefined || cell.value !== cell.answer) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
 
 	var saveBoard = function() {
 		if ('localStorage' in window && window.localStorage !== null) {
@@ -164,7 +186,7 @@
 	};
 
 	var methods = {
-		init: function() {
+		init: function(opts) {
 			return this.each(function() {
 				var $this = $(this);
 				drawBoard($this);
@@ -172,6 +194,7 @@
 					.keydown(onKeyPress)
 					.click(onCellClick);
 				$this.find('.number-popup .board-cell').click(onPopupNumberSelection);
+				options = opts;
 			});
 		},
 		reset: function() {
@@ -203,11 +226,11 @@
 		}
 	};
 
-	$.fn.sudoku = function(method) {
-		if (methods[method]) {
-			return methods[method].apply(this);
-		} else {
-			return methods.init.apply(this);
+	$.fn.sudoku = function(methodOrOptions) {
+		if (methods[methodOrOptions]) {
+			return methods[methodOrOptions].apply(this);
+		} else if (typeof methodOrOptions === 'object' || ! methodOrOptions) {
+			return methods.init.apply(this, arguments);
 		}
 	};
 
