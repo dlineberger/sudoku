@@ -133,15 +133,17 @@
 		if (e.target != this) return;
 		var $this = $(this);
 
-		if ($this.hasClass('selected') || $this.parent().parent().hasClass('number-popup')) {
+		if ($this.parent().parent().hasClass('number-popup')) {
 			return;
 		}
 
+		var isSelected = $this.hasClass('selected');
+		
 		var $sudoku = $this.closest('.sudoku');
 		$sudoku.find('.selected').removeClass('selected');
 		closePopup($sudoku);
 
-		if ($this.hasClass('editable')) {
+		if (!isSelected && $this.hasClass('editable')) {
 			$this.removeClass('incorrect-value correct-value').addClass('selected');
 			openPopup($sudoku, $this);
 			return;
