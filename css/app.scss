@@ -32,10 +32,22 @@ header {
 		text-transform: uppercase;
 	}
 
+	// Shamelessly copied from Bootstrap
 	button {
 		background-color: #fff;
-		border: 1px solid #000;
+		border: 1px solid #ccc;
+		border-radius: 4px;
 		height: 24px;
+
+		&:hover {
+			color: #333;
+			background-color: #e6e6e6;
+			border-color: #adadad;
+		}
+
+		&:active {
+			box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+		}
 		
 	}
 
